@@ -27,6 +27,8 @@ h6 {
 form {
     border-bottom: 1px solid black;
     text-align: center;
+    flex-direction: column;
+    display: flex;
 }
 
 
