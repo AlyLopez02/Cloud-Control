@@ -7,10 +7,68 @@
 
 var apiKey = "9d9859759466e90e3c8754b872876ef0";
 
-var city = document.getElementById("user-input").value;
+var inputField = document.getElementById("user-input");
+
+var submitBtn = document.getElementById("submit");
 
 
 
+
+
+
+function gatherWeather() {
+    AndWeather();
+}
+
+
+
+// Geocoding API
+
+function getGeoAndWeather() {
+    var userInput = inputField.value;
+    var geoInput = userInput.replace(" ", "");
+    var geoApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + geoInput + "&limit=1&appid=" + apiKey;
+    fetch(geoApiUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            geoLat = data[0].lat;
+            console.log(geoLat);
+
+            geoLon = data[0].lon;
+            console.log(geoLon);
+        })
+        .then(function () {
+            var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + geoLat + "&lon=" + geoLon + "&exclude=minutely,hourly,daily,alerts&appid=" + apiKey
+            fetch(weatherApiUrl)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data);
+
+                });
+        })
+        
+};
+
+
+
+
+
+
+
+
+
+submitBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+});
+
+submitBtn.addEventListener("click", gatherWeather);
+
+// submitBtn.addEventListener("click", getLatLong);
 
 
 
@@ -21,4 +79,6 @@ var city = document.getElementById("user-input").value;
 
 
 // fetch(queryURL)
+
+
 
