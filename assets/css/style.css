@@ -15,10 +15,6 @@ h1 {
     padding-bottom: 5px;
 }
 
-h3 {
-    margin-left: 50px;
-}
-
 h6 {
     font-weight: bold;
     color: dimgray;
@@ -45,12 +41,4 @@ form {
 
 #search {
     text-align: center;
-}
-
-#recent-cities {
-    text-align: center;
-}
-
-.city-button {
-    margin: 10px 0px;
 }
