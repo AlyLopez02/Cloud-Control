@@ -11,7 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <script src="https://kit.fontawesome.com/0ad641d2c3.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/0ad641d2c3.js" crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <title>Cloud Control</title>
@@ -60,22 +61,24 @@
                 <div class="col-md-10" id="weather">
                     <div class="row-cols-auto">
                         <div class="container" id="main-weather">
-                            <h2>City</h2><p>Date</p>
+                            <h2 id="name">City</h2>
+                            <p>Date</p>
+                            <div id="icon"></div>
 
                             <ul>
-                                <li>Temp:</li>
-                                <li>Wind:</li>
-                                <li>Humidity:</li>
-                                <li id="uvi">UV Index:</li>
+                                <li id="temp">Temp:</li>
+                                <li id="wind">Wind:</li>
+                                <li id="humidity">Humidity:</li>
+                                <li id="uvi">UV Index: <button id="uvi-button" type="button" class="btn"></button></li>
                             </ul>
                         </div>
                     </div>
 
                     <br>
-                    
-                
+
+
                     <div class="row-cols-auto">
-                        <h3 class="text-center" >5-Day Forecast:</h3>
+                        <h3 class="text-center">5-Day Forecast:</h3>
 
                         <div class="container" id="day1">
                             <h5></h5>
@@ -136,6 +139,7 @@
 
 
     <script src="./assets/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
 </body>
 
 </html>
