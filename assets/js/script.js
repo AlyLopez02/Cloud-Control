@@ -1,7 +1,4 @@
 // add the following classes to the recent buttons: city-button btn btn-outline-info btn-block
-// also create a <br> above each button
-
-
 
 
 
@@ -16,9 +13,53 @@ var mainWeatherContainer = document.getElementById("main-weather");
 var uviBtn = document.getElementById("uvi-button");
 
 
+var temps = [
+    document.getElementById("temp1"), 
+    document.getElementById("temp2"),
+    document.getElementById("temp3"),
+    document.getElementById("temp4"),
+    document.getElementById("temp5")
+];
+
+var winds = [
+    document.getElementById("wind1"),
+    document.getElementById("wind2"),
+    document.getElementById("wind3"),
+    document.getElementById("wind4"),
+    document.getElementById("wind5")
+];
+
+var humidities = [
+    document.getElementById("humidity1"),
+    document.getElementById("humidity2"),
+    document.getElementById("humidity3"),
+    document.getElementById("humidity4"),
+    document.getElementById("humidity5")
+];
+
+
+var dates = [
+    document.getElementById("date1"), 
+    document.getElementById("date2"),
+    document.getElementById("date3"),
+    document.getElementById("date4"),
+    document.getElementById("date5") 
+];
+
+var icons = [
+    document.getElementById("icon1"),
+    document.getElementById("icon2"),
+    document.getElementById("icon3"),
+    document.getElementById("icon4"),
+    document.getElementById("icon5")
+]
+
+
+
+// Functions
+
 function gatherWeather() {
     getGeoAndWeather();
-    // Input moment here or create an initialization function so that the dates will appear
 }
 
 
@@ -57,10 +98,17 @@ function getGeoAndWeather() {
                 .then(function (data) {
                     console.log(data);
 
+                    // Date
+                    var currentDate = data.current.dt;
+                    var dateString = moment.unix(currentDate).format("MM/DD/YYYY");
+                    console.log(dateString);
+                    document.getElementById("today").textContent = dateString;
+
+
                     // Icon
                     currentIcon = data.current.weather[0].icon;
                     console.log(currentIcon);
-                    
+
 
                     // Current Temp
                     var currentTemp = data.current.temp;
@@ -82,10 +130,10 @@ function getGeoAndWeather() {
                     console.log(currentUVI);
                     document.getElementById("uvi-button").textContent = (currentUVI);
                 })
-                .then(function (){
-                    
+                .then(function () {
+
                     document.getElementById("icon").innerHTML = ("<img src='http://openweathermap.org/img/wn/" + currentIcon + "@2x.png'>");
-                    
+
                     if (currentUVI <= 2) {
                         uviBtn.classList.remove("btn-danger");
                         uviBtn.classList.remove("btn-warning");
@@ -101,7 +149,35 @@ function getGeoAndWeather() {
                     }
                 });
         })
+        .then(function () {
+            var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + geoLat + "&lon=" + geoLon + "&units=imperial&exclude=current,minutely,hourly,alerts&appid=" + apiKey
+            fetch(weatherApiUrl)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data);
 
+
+
+                    for (var i = 1; i < 6; i++) {
+                        // Forecast Dates
+                       dates[(i - 1)].textContent = moment.unix(data.daily[i].dt).format("MM/DD/YYYY");
+
+                        // Forecast Icons
+                        icons[(i - 1)].innerHTML = ("<img src='http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png'>");
+
+                        // Forecast Temps
+                        temps[(i - 1)].textContent = ("Temp: " + data.daily[i].temp.day + "°F");
+
+                        //Forecast Wind Speeds
+                        winds[(i - 1)].textContent = ("Wind: " + data.daily[i].wind_speed + " MPH");
+
+                        // Forecast Humidities
+                        humidities[(i - 1)].textContent = ("Humidity: " + data.daily[i].humidity + "%");
+                    }
+                })
+        })
 };
 
 
