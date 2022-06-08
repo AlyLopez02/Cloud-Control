@@ -1,7 +1,4 @@
-// add the following classes to the recent buttons: city-button btn btn-outline-info btn-block
-
-
-
+// All global variables (and arrays)
 var apiKey = "9d9859759466e90e3c8754b872876ef0";
 
 var inputField = document.getElementById("user-input");
@@ -11,6 +8,8 @@ var submitBtn = document.getElementById("submit");
 var mainWeatherContainer = document.getElementById("main-weather");
 
 var uviBtn = document.getElementById("uvi-button");
+
+var btnRecentField = document.getElementById("recent-cities");
 
 
 var temps = [
@@ -60,6 +59,7 @@ var icons = [
 
 function gatherWeather() {
     getGeoAndWeather();
+    //Call the function that stores all of the new information to the local storage
 }
 
 
@@ -88,6 +88,19 @@ function getGeoAndWeather() {
             cityName = data[0].name;
             console.log(cityName);
             document.getElementById("name").textContent = cityName;
+        })
+        .then (function (){  //Recent button is created
+            
+            if (document.getElementById(cityName)) {
+                console.log("Button has already been created.")
+                btnRecentField.prepend(document.getElementById(cityName));
+            } else {
+            var recentButton = (document.createElement("button"));
+            recentButton.setAttribute("id", cityName);
+            recentButton.textContent = cityName;
+            btnRecentField.prepend(recentButton);
+            document.getElementById(cityName).classList.add("btn", "btn-outline-info", "btn-block");
+            }
         })
         .then(function () {
             var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + geoLat + "&lon=" + geoLon + "&units=imperial&exclude=minutely,hourly,daily,alerts&appid=" + apiKey
@@ -180,31 +193,23 @@ function getGeoAndWeather() {
         })
 };
 
+function storeInfo(){
+
+}
+
+function pullInfo() {
+
+}
 
 
 
-
-
-
-
-
+// Buttons/Areas with Event Listener
 submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
 });
 
 submitBtn.addEventListener("click", gatherWeather);
 
-// submitBtn.addEventListener("click", getLatLong);
 
-
-
-// https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-
-// need to change this to fit the link above
-// var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
-
-
-// fetch(queryURL)
-
-
-
+// Use this to enable clicking on the recent buttons (ironically also use 'this' to state which button is being clicked)
+// btnRecentField.addEventListener("click", )   //call the function that will pull the information from local storage and display it on the page
