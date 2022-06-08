@@ -68,7 +68,7 @@ function gatherWeather() {
 
 function getGeoAndWeather() {
     var userInput = inputField.value;
-    var geoInput = userInput.replace(" ", "");
+    var geoInput = userInput.replace(" ", "-");
     var geoApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + geoInput + "&limit=1&appid=" + apiKey;
     fetch(geoApiUrl)
         .then(function (response) {
@@ -100,6 +100,7 @@ function getGeoAndWeather() {
             recentButton.textContent = cityName;
             btnRecentField.prepend(recentButton);
             document.getElementById(cityName).classList.add("btn", "btn-outline-info", "btn-block");
+            document.getElementById(cityName).addEventListener("click", resubmitPrev);
             }
         })
         .then(function () {
@@ -193,15 +194,12 @@ function getGeoAndWeather() {
         })
 };
 
-function storeInfo(){
-
-}
-
-function pullInfo() {
-
-}
-
-
+function resubmitPrev(){
+    var nameCity = $(this).attr("id");
+    console.log(nameCity);
+    inputField.value = nameCity;
+    getGeoAndWeather();
+};
 
 // Buttons/Areas with Event Listener
 submitBtn.addEventListener("click", function (event) {
@@ -209,7 +207,3 @@ submitBtn.addEventListener("click", function (event) {
 });
 
 submitBtn.addEventListener("click", gatherWeather);
-
-
-// Use this to enable clicking on the recent buttons (ironically also use 'this' to state which button is being clicked)
-// btnRecentField.addEventListener("click", )   //call the function that will pull the information from local storage and display it on the page
