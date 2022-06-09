@@ -104,7 +104,7 @@
         }
 
         var geoInput = userInput.replace(" ", "-");
-        var geoApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + geoInput + "&limit=1&appid=" + apiKey;
+        var geoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + geoInput + "&limit=1&appid=" + apiKey;
         fetch(geoApiUrl)    //Geocode API
             .then(function (response) {
                 return response.json();
@@ -196,7 +196,7 @@
                     .then(function () {
 
                         // adds icon for current weather
-                        document.getElementById("icon").innerHTML = ("<img src='http://openweathermap.org/img/wn/" + currentIcon + "@2x.png'>");
+                        document.getElementById("icon").innerHTML = ("<img src='https://openweathermap.org/img/wn/" + currentIcon + "@2x.png'>");
 
                         // adds color to show severity of UV index
                         if (currentUVI <= 2) {
@@ -228,7 +228,7 @@
                             dates[(i - 1)].textContent = moment.unix(data.daily[i].dt).format("MM/DD/YYYY");
 
                             // Forecast Icons
-                            icons[(i - 1)].innerHTML = ("<img src='http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png'>");
+                            icons[(i - 1)].innerHTML = ("<img src='https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png'>");
 
                             // Forecast Temps
                             temps[(i - 1)].textContent = ("Temp: " + data.daily[i].temp.day + "°F");
