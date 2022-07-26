@@ -26,10 +26,7 @@ In the Javascript file, I did multiple things. I:
 - Called the initialization function so that the page would load as desired.
 
 ## Some Problem(s)/Explanation(s)
-I feel the need to explain some thing(s) so I have done so below:
-
-- I apologize for submitting this late! I am doing my best to catch up with my work after falling sick on top of already being behind because of my graduation. I plan to be caught up on everything before this weekend.
-- I was unable to figure out how to break up my biggest function. I attempted multiple things, however, nothing worked since the API call(s) needed to finish before I could let the rest of the code run. Thus, I was unsure of how to fix it. I used the '.then()' method to break up the code as well as have it run in the correct order. Please let me know if there was a better way to do this.
+I was unable to figure out how to break up my biggest function. I attempted multiple things, however, nothing worked since the API call(s) needed to finish before I could let the rest of the code run. Thus, I was unsure of how to fix it. I used the '.then()' method to break up the code as well as have it run in the correct order. Please let me know if there was a better way to do this.
 
 Please do not hesitate to inform or advise me on anything in my code that could be done better. I truly appreciate the help!
 
